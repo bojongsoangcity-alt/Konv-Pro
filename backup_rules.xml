@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API key TIDAK berada di data aplikasi (hanya di BuildConfig/APK),
+  sehingga tidak mungkin ikut backup. Preferensi pemakaian AI tetap dikecualikan
+  agar data operasional tidak berpindah perangkat tanpa kendali developer.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="ai_usage.xml" />
+</full-backup-content>

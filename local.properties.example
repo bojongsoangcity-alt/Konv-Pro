@@ -1,0 +1,47 @@
+# ============================================================================
+#  KonveksiPro - Konfigurasi AI DEVELOPER (JANGAN commit file local.properties)
+#  Salin file ini menjadi local.properties, lalu isi nilai sebenarnya.
+#  Semua baris di bawah dibaca oleh Gradle saat build (lihat app/build.gradle.kts)
+#  dan ditempel ke BuildConfig.AI_CONFIG. Pengguna aplikasi tidak pernah melihatnya.
+# ============================================================================
+
+# --- saklar utama ---
+ai.externalEnabled=true
+ai.primary=gemini_main
+ai.fallback=openrouter_fallback
+
+# --- batas penggunaan (kendali biaya, milik developer) ---
+ai.limits.maxRequestsPerDay=40
+ai.limits.maxTokensPerDay=60000
+# 0 = hanya provider GRATIS. Isi > 0 hanya jika Anda sengaja mengizinkan biaya.
+ai.limits.maxCostUsdPerDay=0
+ai.limits.globalTimeoutMs=20000
+ai.limits.maxFallbackAttempts=2
+ai.privacy.requireConsent=true
+
+# --- provider 1: Google Gemini (adapter GEMINI) ---
+ai.provider.gemini_main.type=GEMINI
+ai.provider.gemini_main.baseUrl=https://generativelanguage.googleapis.com/v1beta
+ai.provider.gemini_main.model=gemini-2.0-flash
+ai.provider.gemini_main.key=ISI_API_KEY_GEMINI_ANDA
+ai.provider.gemini_main.enabled=true
+ai.provider.gemini_main.priority=1
+ai.provider.gemini_main.timeoutMs=15000
+ai.provider.gemini_main.maxRetries=1
+ai.provider.gemini_main.tokenCap=512
+# Harga resmi per 1k token (USD). Kosongkan untuk tier gratis.
+# ai.provider.gemini_main.priceIn=0
+# ai.provider.gemini_main.priceOut=0
+
+# --- provider 2 (fallback): endpoint kompatibel OpenAI ---
+ai.provider.openrouter_fallback.type=OPENAI_COMPATIBLE
+ai.provider.openrouter_fallback.baseUrl=https://openrouter.ai/api/v1
+ai.provider.openrouter_fallback.model=meta-llama/llama-3.1-8b-instruct:free
+ai.provider.openrouter_fallback.key=ISI_API_KEY_PROVIDER_CADANGAN
+ai.provider.openrouter_fallback.enabled=false
+ai.provider.openrouter_fallback.priority=2
+ai.provider.openrouter_fallback.timeoutMs=20000
+ai.provider.openrouter_fallback.maxRetries=0
+
+# --- halaman diagnostik developer (opsional, build khusus) ---
+# dev.diagnostics=true
